@@ -100,7 +100,14 @@
             [expected (expected-thunk)])
         (if (equal? actual expected) (void) (printf "test ~s failed\n" name))))))
         
-(test "Fruit test" "apple" "pear")
+;(test "Fruit test" "apple" "pear")
+;(test "Fruit test" "apple" "apple")
+;(test "Fruit test" "pear" "apple")
+;(test "Fruit test" "pear" (/ 1 0))
+
+; Ex.9 (check with Fred)
+; If the task is to control the flow of evaluation, leave it to users.
+; If the task involves the information from the input literal, then use macro
 
 
 
