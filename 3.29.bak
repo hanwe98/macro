@@ -1,0 +1,4 @@
+#lang racket/base
+
+; parameter
+(define location (make-parameter "here"))
