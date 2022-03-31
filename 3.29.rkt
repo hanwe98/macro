@@ -109,7 +109,6 @@
 ; If the task is to control the flow of evaluation, leave it to users.
 ; If the task involves the information from the input literal, then use macro
 
-; some
 
 
 
