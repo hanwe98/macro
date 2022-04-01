@@ -107,7 +107,7 @@
   (λ (name actual-thunk expected-thunk)
     (with-handlers ([exn? (λ (e) (printf "test ~s failed\n" name))])
       (let ([actual (actual-thunk)]
-            [expected (expected-thunk)])
+            [expected (expected-thulnk)])
         (if (equal? actual expected) (void) (printf "test ~s failed\n" name))))))
         
 ;(test "Fruit test" "apple" "pear")

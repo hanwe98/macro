@@ -15,18 +15,14 @@
 ; Ex.1
 (define-syntax-rule (noisy-v1 expr)
   (begin
-    (printf (current-output-port)
-             "evaluating ~s\n"
-             (quote expr))
+    (printf "evaluating ~s\n" (quote expr))
     expr))
 
 ; Ex.2
 ; Fred
 (define-syntax-rule (noisy-v2 expr)
   (begin
-    (fprintf (current-output-port)
-             "evaluating ~s\n"
-             (quote expr))
+    (printf "evaluating ~s\n" (quote expr))
     (begin0
       expr
       (display "done\n"))))
