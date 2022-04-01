@@ -64,7 +64,7 @@
           body-expr))
 ; Note:
 ; 1. 
-; Assumption to set! in my-letrec:
+; Assumption to set! in my-letrec: Fred
 ; rhs-expr calls var-id in its body. So, var-ids inside rhs-expr are unbounded if not given a initial value.
 
 ; 2. Ellipsis imitate the previous term in the following way:
@@ -80,12 +80,12 @@
 ;(my-let ([1 0]) 1)
 ; λ: not an identifier, identifier with default, or keyword in: 1
 ; 2. 
-; ... Can't think of any  FF
+; ... Can't think of any  Fred
 
 ; run-time error
 ; (my-let ([x 3]) (string-append x "hi"))
 
-; misuse with no error?  FF
+; misuse with no error?  Fred
 ;(let ([x 0])
 ;  (my-let ([x 1] [y x]) y))
 ; Expect: 1
