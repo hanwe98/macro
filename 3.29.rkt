@@ -6,6 +6,8 @@
     (let ([x e1])
       (if x e2 (thunk3)))))
 
+; Global scope vs Dynamic scope?
+; Fred
 (define-syntax-rule (iflet-param x e1 e2 e3)
   (parameterize ([thunk3 (lambda () e3)])
     (parameterize ([x e1])
@@ -23,18 +25,26 @@
 ;    (get)))
 
 ; Ex.4
+; Recursive syntax rule is introduced in chapter 1.9.
+; Felt like cheating here
+; Plus, no parameterize is used
+; Fred
 #;(define-syntax-rule (forever expr)
   (begin
     expr
     (printf "~s\n" (quote expr))
     (forever expr)))
 
+
 ; Ex.5
+; check
+; Fred
 #;(define-syntax-rule (handle e1 e2)
   (with-handlers ([exn? (λ (e) e2)])
     e1))
 
 ; 1.6
+; Is it really a common way to write helper functions inside syntax-rule?
 ; Ex.6
 (define-syntax-rule (forever expr)
   (forever-fn (λ () expr)))

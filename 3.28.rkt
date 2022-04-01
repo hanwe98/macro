@@ -21,6 +21,7 @@
     expr))
 
 ; Ex.2
+; Fred
 (define-syntax-rule (noisy-v2 expr)
   (begin
     (fprintf (current-output-port)
