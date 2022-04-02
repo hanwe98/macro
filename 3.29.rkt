@@ -7,7 +7,7 @@
       (if x e2 (thunk3)))))
 
 ; Global scope vs Dynamic scope?
-; Fred
+; Fred 
 (define-syntax-rule (iflet-param x e1 e2 e3)
   (parameterize ([thunk3 (lambda () e3)])
     (parameterize ([x e1])
@@ -29,10 +29,12 @@
 ; Felt like cheating here
 ; Plus, no parameterize is used
 ; Fred
-#;(define-syntax-rule (forever expr)
-  (begin
+(define-syntax-rule (forever expr)
+  (letrec ([inf (λ () expr (inf))])
+    (inf))
+  ; failed attempt
+  #;(begin
     expr
-    (printf "~s\n" (quote expr))
     (forever expr)))
 
 
@@ -46,7 +48,7 @@
 ; 1.6
 ; Is it really a common way to write helper functions inside syntax-rule?
 ; Ex.6
-(define-syntax-rule (forever expr)
+#;(define-syntax-rule (forever expr)
   (forever-fn (λ () expr)))
 (define forever-fn
   (λ (thunk)
@@ -107,7 +109,7 @@
   (λ (name actual-thunk expected-thunk)
     (with-handlers ([exn? (λ (e) (printf "test ~s failed\n" name))])
       (let ([actual (actual-thunk)]
-            [expected (expected-thulnk)])
+            [expected (expected-thunk)])
         (if (equal? actual expected) (void) (printf "test ~s failed\n" name))))))
         
 ;(test "Fruit test" "apple" "pear")
@@ -117,11 +119,8 @@
 
 ; Ex.9 Fred
 ; If the task is to control the flow of evaluation, leave it to users.
-; If the task involves the information from the input literal, then use macro
-
-
-
-
+; If the task involves the information from the  input literal, then use macro
+; If something is evaluated at run-time, macro cannot catch it.
 
 
 
