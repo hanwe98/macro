@@ -86,26 +86,11 @@
 ; lambda: duplicate argument name in: x
 
 ; run-time error
-; (my-let ([x 3]) (string-append x "hi"))
+;(let ([x "1"])
+;    (my-let ([x 1] [y x]) (+ y 41)))
 
 ; misuse with no error?  Fred
 ;(let ([x 0])
 ;  (my-let ([x 1] [y x]) y))
 ; Expect: 1
 ; Return: 0
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
