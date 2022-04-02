@@ -52,16 +52,66 @@
     [(my-or b1 b2 ...)
      (if b1 #t (my-or b2 ...))]))
 
+; 1.10
+#;(define-syntax my-cond
+  (syntax-rules (else)
+    [(my-cond)
+     (void)]
+    [(my-cond [else answer-expr])
+     answer-expr]
+    [(my-cond [question-expr answer-expr] clause ...)
+     (if question-expr answer-expr
+         (my-cond clause ...))]))
+; Ex.15
+#;(define-syntax my-cond
+  (syntax-rules (else =>)
+    [(my-cond)
+     (void)]
+    [(my-cond [else answer-expr])
+     answer-expr]
+    [(my-cond [question-expr => proc-expr] clause ...)
+     (let ([q question-expr])
+       (if q
+           (with-handlers ([exn:fail:contract? (λ (e) (printf "~s" e))])
+             (proc-expr q))
+           (my-cond clause ...)))]
+    [(my-cond [question-expr answer-expr] clause ...)
+     (if question-expr answer-expr
+         (my-cond clause ...))]))
+; tests
+;> (my-cond
+;   [(positive? -5) (error "doesn't get here")]
+;   [(zero? -5) (error "doesn't get here, either")]
+;   [(positive? 5) 'here])
+;'here
 
+;> (cond
+;   [(member 2 '(1 2 3)) => (lambda (l) (map - l))])
+;'(-2 -3)
 
+;(my-cond
+;   [(member 2 '(1 2 3)) => (lambda () (map - l))])
+; returns an error
 
-
-
-
-
-
-
-
+; Ex.16
+(define-syntax my-cond
+  (syntax-rules (else =>)
+    [(my-cond)
+     (void)]
+    [(my-cond [else answer-expr])
+     answer-expr]
+    [(my-cond [question-expr] clause ...)
+     (let ([q question-expr])
+       (if q q (my-cond clause ...)))]
+    [(my-cond [question-expr => proc-expr] clause ...)
+     (let ([q question-expr])
+       (if q
+           (with-handlers ([exn:fail:contract? (λ (e) (printf "~s" e))])
+             (proc-expr q))
+           (my-cond clause ...)))]
+    [(my-cond [question-expr answer-expr ...] clause ...)
+     (if question-expr (begin answer-expr ...)
+         (my-cond clause ...))]))
 
 
 
