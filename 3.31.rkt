@@ -1,4 +1,5 @@
 #lang racket/base
+(provide (all-defined-out))
 
 ; 1.7
 (define-syntax-rule (capture-output e ...)
@@ -60,8 +61,9 @@
 
 (define-syntax-rule (my-letrec ([var-id rhs-expr] ...) body-expr)
   (my-let ([var-id #f] ...)
-          (set! var-id rhs-expr) ... ; why? Fred
-          body-expr))
+          (begin
+            (set! var-id rhs-expr) ... ; why? Fred
+            body-expr)))
 ; Note:
 ; 1. 
 ; Assumption to set! in my-letrec: Fred
@@ -80,7 +82,8 @@
 ;(my-let ([1 0]) 1)
 ; λ: not an identifier, identifier with default, or keyword in: 1
 ; 2. 
-; ... Can't think of any  Fred
+; (my-let ([x 1] [x 2]) x)
+; lambda: duplicate argument name in: x
 
 ; run-time error
 ; (my-let ([x 3]) (string-append x "hi"))
@@ -90,8 +93,6 @@
 ;  (my-let ([x 1] [y x]) y))
 ; Expect: 1
 ; Return: 0
-
-
 
 
 
