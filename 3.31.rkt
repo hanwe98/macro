@@ -16,15 +16,7 @@
 (define-syntax-rule (print-input i)
   (printf "~s" (quote i)))
 
-; Fred
-; 1. (list exmaple) ellipsis not only replicate the pattern variable,
-; not also imitate the operation on the pattern variable?
-; 2. (void example) Is there a begin, i.e., (begin e ...)?
-; 3. 
-
 ; Ex.10
-; check with Fred
-; What is an alternative way besides using a helper function?
 (define-syntax-rule (my-and e1 ...)
   (my-and-fn (list (λ () e1) ...)))
 
@@ -62,7 +54,7 @@
 (define-syntax-rule (my-letrec ([var-id rhs-expr] ...) body-expr)
   (my-let ([var-id #f] ...)
           (begin
-            (set! var-id rhs-expr) ... ; why? Fred
+            (set! var-id rhs-expr) ... 
             body-expr)))
 ; Note:
 ; 1. 
@@ -89,7 +81,7 @@
 ;(let ([x "1"])
 ;    (my-let ([x 1] [y x]) (+ y 41)))
 
-; misuse with no error?  Fred
+; misuse with no error?
 ;(let ([x 0])
 ;  (my-let ([x 1] [y x]) y))
 ; Expect: 1

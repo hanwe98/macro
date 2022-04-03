@@ -7,7 +7,7 @@
       (if x e2 (thunk3)))))
 
 ; Global scope vs Dynamic scope?
-; Fred 
+; Dynamic scope is a mistake!
 (define-syntax-rule (iflet-param x e1 e2 e3)
   (parameterize ([thunk3 (lambda () e3)])
     (parameterize ([x e1])
@@ -28,7 +28,6 @@
 ; Recursive syntax rule is introduced in chapter 1.9.
 ; Felt like cheating here
 ; Plus, no parameterize is used
-; Fred
 (define-syntax-rule (forever expr)
   (letrec ([inf (λ () expr (inf))])
     (inf))
@@ -40,7 +39,6 @@
 
 ; Ex.5
 ; check
-; Fred
 #;(define-syntax-rule (handle e1 e2)
   (with-handlers ([exn? (λ (e) e2)])
     e1))
@@ -117,7 +115,7 @@
 ;(test "Fruit test" "pear" "apple")
 ;(test "Fruit test" "pear" (/ 1 0))
 
-; Ex.9 Fred
+; Ex.9 
 ; If the task is to control the flow of evaluation, leave it to users.
 ; If the task involves the information from the  input literal, then use macro
 ; If something is evaluated at run-time, macro cannot catch it.

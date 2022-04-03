@@ -19,7 +19,6 @@
     expr))
 
 ; Ex.2
-; Fred
 (define-syntax-rule (noisy-v2 expr)
   (begin
     (printf "evaluating ~s\n" (quote expr))
