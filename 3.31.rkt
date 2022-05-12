@@ -86,3 +86,4 @@
 ;  (my-let ([x 1] [y x]) y))
 ; Expect: 1
 ; Return: 0
+(my-let ([x 10] [(y x) (values 10 20)]) (+ x y))
